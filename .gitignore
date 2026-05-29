@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+
+# Build outputs
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Redis data (if local)
+dump.rdb
+
+# PostgreSQL data (if local)
+*.sqlbk
+
+# Lock files
+package-lock.json
+yarn.lock

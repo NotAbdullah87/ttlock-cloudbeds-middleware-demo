@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LockFlow — Smart Lock Middleware</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+            <rect width="36" height="36" rx="10" fill="url(#grad)"/>
+            <path d="M12 18h12M18 12v12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+            <defs>
+              <linearGradient id="grad" x1="0" y1="0" x2="36" y2="36">
+                <stop stop-color="#6366f1"/>
+                <stop offset="1" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <div class="logo-text">
+            <span class="logo-name">LockFlow</span>
+            <span class="logo-sub">v1.0.0</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="6" height="6" rx="1.5"/>
+            <rect x="11" y="3" width="6" height="6" rx="1.5"/>
+            <rect x="3" y="11" width="6" height="6" rx="1.5"/>
+            <rect x="11" y="11" width="6" height="6" rx="1.5"/>
+          </svg>
+          <span>Overview</span>
+        </a>
+        <a href="#" class="nav-item" data-page="reservations">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="14" height="13" rx="2"/>
+            <path d="M3 8h14M7 2v4M13 2v4"/>
+          </svg>
+          <span>Reservations</span>
+        </a>
+        <a href="#" class="nav-item" data-page="passcodes">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="4" y="8" width="12" height="9" rx="2"/>
+            <path d="M7 8V5a3 3 0 016 0v3"/>
+            <circle cx="10" cy="13" r="1.5" fill="currentColor"/>
+          </svg>
+          <span>Passcodes</span>
+        </a>
+        <a href="#" class="nav-item" data-page="logs">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 6h12M4 10h8M4 14h10"/>
+          </svg>
+          <span>Activity</span>
+        </a>
+        <a href="#" class="nav-item" data-page="locks">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="5" y="9" width="10" height="8" rx="2"/>
+            <path d="M7 9V6a3 3 0 016 0v3"/>
+            <circle cx="10" cy="13" r="1" fill="currentColor"/>
+          </svg>
+          <span>Locks</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status">
+          <div class="status-indicator online">
+            <span class="pulse"></span>
+            <span>All systems operational</span>
+          </div>
+        </div>
+        <div class="time-display">
+          <span id="current-time">--:--</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="header">
+        <div class="header-left">
+          <h1 id="page-title">Overview</h1>
+        </div>
+        <div class="header-right">
+          <div class="api-status">
+            <span class="api-dot"></span>
+            <span>API</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content" id="content-area">
+        <!-- Dashboard -->
+        <div class="page active" id="page-dashboard">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon properties">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 9l8-6 8 6v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/>
+                  <path d="M9 20V14h4v6"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Properties</span>
+                <span class="stat-value" id="stat-properties">—</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon rooms">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="5" width="16" height="14" rx="2"/>
+                  <path d="M7 5V3M15 5V3"/>
+                  <path d="M3 10h16"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Rooms</span>
+                <span class="stat-value" id="stat-rooms">—</span>
+              </div>
+            </div>
+            <div class="stat-card success">
+              <div class="stat-icon locks">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="5" y="10" width="12" height="9" rx="2"/>
+                  <path d="M8 10V7a3 3 0 016 0v3"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Locks Online</span>
+                <span class="stat-value" id="stat-locks-online">—</span>
+              </div>
+            </div>
+            <div class="stat-card warning">
+              <div class="stat-icon battery">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="7" width="14" height="8" rx="2"/>
+                  <path d="M17 10h2v2h-2"/>
+                  <rect x="5" y="9" width="4" height="4" rx="1" fill="currentColor"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Low Battery</span>
+                <span class="stat-value" id="stat-low-battery">—</span>
+              </div>
+            </div>
+            <div class="stat-card danger">
+              <div class="stat-icon offline">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="M11 7v4M11 14h.01"/>
+                </svg>
+              </div>
+              <div class="stat-info">
+                <span class="stat-label">Offline</span>
+                <span class="stat-value" id="stat-offline">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="card">
+              <div class="card-header">
+                <h3>Recent Reservations</h3>
+                <a href="#" class="card-link" data-page="reservations">View all</a>
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Guest</th>
+                      <th>Room</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody id="reservations-table-body">
+                    <tr><td colspan="4" class="empty">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3>Recent Activity</h3>
+                <a href="#" class="card-link" data-page="logs">View all</a>
+              </div>
+              <div class="card-body">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Action</th>
+                      <th>Guest</th>
+                      <th>Room</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="logs-table-body">
+                    <tr><td colspan="4" class="empty">Loading...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reservations -->
+        <div class="page" id="page-reservations">
+          <div class="card full">
+            <div class="card-header">
+              <h3>All Reservations</h3>
+              <input type="text" class="search" placeholder="Search..." id="search-reservations">
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Reservation ID</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Check In</th>
+                    <th>Check Out</th>
+                    <th>Passcode</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="all-reservations-body">
+                  <tr><td colspan="7" class="empty">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passcodes -->
+        <div class="page" id="page-passcodes">
+          <div class="card full">
+            <div class="card-header">
+              <h3>All Passcodes</h3>
+              <input type="text" class="search" placeholder="Search..." id="search-passcodes">
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Code</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Valid From</th>
+                    <th>Valid Until</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="all-passcodes-body">
+                  <tr><td colspan="6" class="empty">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logs -->
+        <div class="page" id="page-logs">
+          <div class="card full">
+            <div class="card-header">
+              <h3>Activity Log</h3>
+              <select class="filter" id="filter-action">
+                <option value="">All Actions</option>
+                <option value="generated">Passcode Generated</option>
+                <option value="revoked">Passcode Revoked</option>
+                <option value="checkedin">Guest Checked In</option>
+                <option value="checkedout">Guest Checked Out</option>
+                <option value="reassigned">Room Reassigned</option>
+              </select>
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Action</th>
+                    <th>Lock ID</th>
+                    <th>Guest</th>
+                    <th>Room</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody id="all-logs-body">
+                  <tr><td colspan="5" class="empty">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Locks -->
+        <div class="page" id="page-locks">
+          <div class="card full">
+            <div class="card-header">
+              <h3>Lock Management</h3>
+              <select class="filter" id="filter-lock-status">
+                <option value="">All Status</option>
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+                <option value="low">Low Battery</option>
+              </select>
+            </div>
+            <div class="card-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Lock ID</th>
+                    <th>Room</th>
+                    <th>Property</th>
+                    <th>Status</th>
+                    <th>Battery</th>
+                    <th>Signal</th>
+                  </tr>
+                </thead>
+                <tbody id="all-locks-body">
+                  <tr><td colspan="6" class="empty">Loading...</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

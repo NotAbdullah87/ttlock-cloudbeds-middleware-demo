@@ -1,0 +1,8 @@
+{
+  "name": "lockflow-dashboard",
+  "version": "1.0.0",
+  "description": "LockFlow Admin Dashboard",
+  "scripts": {
+    "start": "npx serve -l 3002"
+  }
+}

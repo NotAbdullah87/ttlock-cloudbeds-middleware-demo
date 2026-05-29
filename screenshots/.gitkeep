@@ -1,0 +1,18 @@
+# Screenshots
+
+This folder contains screenshots of the TTLock-Cloudbeds middleware system.
+
+## Recommended Screenshots
+
+1. **Dashboard Overview** - Main dashboard showing all stats
+2. **Reservations Page** - List of all reservations
+3. **Passcodes Page** - Active and expired passcodes
+4. **Audit Logs** - System activity logs
+5. **Lock Management** - Lock status and battery levels
+6. **API Flow** - Webhook request/response examples
+
+## How to Capture
+
+- Use browser DevTools (F12) → Network tab to capture API calls
+- Use built-in screenshot tools or Lightshot/ShareX
+- For terminal output, use `mode con cols=120 lines=40` then `doskey /lists` or third-party tools
