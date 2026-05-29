@@ -3,7 +3,7 @@
 A production-grade middleware system that integrates Cloudbeds PMS with TTLock smart locks via webhooks, queues, and a real-time admin dashboard.
 
 ## Architecture
-<img width="1265" height="2012" alt="mermaid-diagram-2026-05-30-043411" src="https://github.com/user-attachments/assets/f5c19115-653d-454b-b815-5774e175074d" />
+<img width="400" height="auto" alt="mermaid-diagram-2026-05-30-043411" src="https://github.com/user-attachments/assets/f5c19115-653d-454b-b815-5774e175074d" />
 
 ## Quick Start
 
