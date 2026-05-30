@@ -4,11 +4,8 @@ A sleek middleware system that connects property management systems with smart l
 
 ## The Stack
 
-```
-Cloudbeds ──webhooks──► LockFlow ──API──► Smart Locks
-                              │
-                              └──► Dashboard
-```
+<img width="400" height="auto" alt="mermaid-diagram-2026-05-30-043411" src="https://github.com/user-attachments/assets/34e52188-669e-4665-8686-5aa8e68585b8" />
+
 
 ## Run It
 
